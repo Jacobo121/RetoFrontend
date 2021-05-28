@@ -6,30 +6,44 @@ const City = () => {
     const API = 'https://www.datos.gov.co/resource/gt2j-8ykr.json';
     const persons = useRequest(API);
 
-    const towns = [];
-    persons.forEach(i => {return towns.push(i.ciudad_municipio) }); 
-    const orderTowns = towns.sort();
+    const towns = {
+        ciudadesRep: [],
+        ciudad: []
+    };
 
-    const result = [];
     persons.map((item) => {
-        if(!result.includes(item.ciudad_municipio_nom)){
-    		result.push(item.ciudad_municipio_nom); 
+        towns.ciudadesRep.push(item.ciudad_municipio_nom);
+        if(!towns.ciudad.includes(item.ciudad_municipio_nom)){
+    		towns.ciudad.push(item.ciudad_municipio_nom); 
     	}
     })
-    const orderResult = result.sort();
+    const orderTowns = towns.ciudadesRep.sort();
 
     var count = 0;
     var arr = orderTowns[0];
+    var contador = 0;
 
     for(let i = 0; i < orderTowns.length; i++) {
         if(arr == orderTowns[i]) {
-            count++
+            count = count + 1;
         } else {
-            console.log(`La ciudad ${arr} se repite ${count} veces`);
             count = 1;
             arr = orderTowns[i];
         }
     }
+
+    towns.ciudad.sort();
+
+    console.log(towns)
+
+    /* result.contagios.forEach(con => {
+        console.log(con);
+        if(con > 100) {
+            result.topCity.push();
+            result.topContagios.push(con);
+        }
+    }) */
+
 
     return (
         <Container>
@@ -42,11 +56,17 @@ const City = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {result.map(town => (
-                        <tr key={town.ciudad_municipio}>
-                            <td>{town}</td>
-                        </tr>
-                    ))}
+                    {/* {orderTowns.map(town => {
+                        if(arr == orderTowns[contador]) {
+                            contador++;
+                            count = count + 1;
+                        } else {
+                            console.log(`La ciudad ${arr} se repite ${count}`);
+                            contador++
+                            count = 1;
+                            arr = orderTowns[contador];
+                        }
+                    })}  */}
                 </tbody>
             </Table>
         </Container>
