@@ -2,14 +2,13 @@ import React from 'react';
 import Gender from '../components/Gender';
 import Age from '../components/Age';
 import City from '../components/City';
-import {Row, Col} from 'react-bootstrap';
-import '../styles/Dashboards.scss';
+import {Row, Col, Container} from 'react-bootstrap';
 
 const Dashboards = () => {
 
     return (
-        <div>
-            <h1 className="mt-4">Contagios en Colombia</h1>
+        <Container>
+            <h1 className="mt-4 title">Contagios en Colombia</h1>
             <Row>
                 <Col>
                     <Gender />
@@ -21,7 +20,7 @@ const Dashboards = () => {
                     <City />
                 </Col>
             </Row>
-        </div>
+        </Container>
     )
 }
 

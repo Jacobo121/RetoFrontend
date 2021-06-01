@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table, Container} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import useRequest from '../hooks/useRequest';
 
 const Age = () => {
@@ -23,6 +24,8 @@ const Age = () => {
     const sumPersonsBaby = personsBabys.length;
     const sumPersonsAdults = personsAdults.length;
     const sumPersonsOld = personsOld.length;
+
+    
 
     return(
         <Container>
@@ -49,7 +52,7 @@ const Age = () => {
                     </tr>
                 </tbody>
             </Table>
-        </Container>
+        </Container> 
     )
 }
 

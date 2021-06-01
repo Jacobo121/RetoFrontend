@@ -1,23 +1,20 @@
 import React from 'react';
-import {Table, Container} from 'react-bootstrap'; 
 import useRequest from '../hooks/useRequest';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Chart from 'react-google-charts';
 
 const Gender = () => {
     const API = 'https://www.datos.gov.co/resource/gt2j-8ykr.json';
     const persons = useRequest(API);
-    console.log(persons);
 
     const personsFeminine = [];
     const personsMasculine = [];
 
     persons.map(gender => { return gender.sexo === 'F' ? personsFeminine.push(gender.sexo) : personsMasculine.push(gender.sexo) });
 
-    const sumPersonsFeminine = personsFeminine.length;
-    const sumPersonsMasculine = personsMasculine.length;
+    const sumPersonsFeminine = ['Femenino', personsFeminine.length];
+    const sumPersonsMasculine = ['Masculino',personsMasculine.length];
 
-    return(
-        <Container>
+    /* <Container>
             <h3 className="mt-4">Numero De Contagios Por Genero</h3>
             <Table className="mt-4" striped bordered hover>
                 <thead>
@@ -37,7 +34,27 @@ const Gender = () => {
                     </tr>
                 </tbody>
             </Table>
-        </Container>
+        </Container> */
+
+    return(
+        <div>
+            <Chart
+                className="chart"
+                width={'500px'}
+                height={'300px'}
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                    ['Task', 'Hours per Day'],
+                    sumPersonsFeminine,
+                    sumPersonsMasculine
+                ]}
+                options={{
+                    title: 'Contagios por genero',
+                }}
+                rootProps={{ 'data-testid': '1' }}
+            />
+        </div>
     )
 }
 
